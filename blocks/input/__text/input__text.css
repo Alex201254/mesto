@@ -1,0 +1,15 @@
+.input__text:not(:last-child) {
+  margin: 0 0 30px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  width: 358px;
+  height: 27px;
+}
+
+@media screen and (max-width: 530px) {
+  .input__text:not(:last-child) {
+    width: 238px;
+    height: 27px;
+  }
+}

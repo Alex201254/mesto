@@ -1,0 +1,11 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin: 54px 0 37px;
+}
+
+@media screen and (max-width: 530px) {
+  .input {
+    margin: 75px 0 0;
+  }
+}

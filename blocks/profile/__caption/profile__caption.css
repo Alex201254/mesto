@@ -1,0 +1,10 @@
+.profile__caption {
+  max-width: 294px;
+  margin: 0;
+}
+
+@media screen and (max-width: 705px) {
+  .profile__caption {
+    max-width: 189px;
+  }
+}

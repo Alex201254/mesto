@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <div class="header__container">
+        <img src="./images/logo.svg" alt="Здесь логотип" class="header__logo">
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__container">
+          <img src="./images/profile-avatar.jpg" alt="Здесь аватарка" class="profile__avatar">
+          <div class="profile__info">
+            <div class="profile__caption">
+              <p class="profile__name">Жак-Ив Кусто</p>
+              <p class="profile__status">Исследователь океана</p>
+            </div>
+            <button class="profile__edit-button"></button>
+          </div>
+          <button class="profile__add-button"></button>
+        </div>
+      </section>
+
+      <section class="elements">
+        <div class="elements__container">
+          <div class="element">
+            <img src="./images/photo1.jpg" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Карачаевск</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/photo2.png" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Гора Эльбрус</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/photo3.png" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Домбай</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/photo3.png" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Гора Эльбрус</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/photo2.png" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Домбай</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+          <div class="element">
+            <img src="./images/photo1.jpg" alt="Здесь картинка" class="element__photo">
+            <div class="element__items">
+              <p class="element__place">Карачаево-Черкесия</p>
+              <button class="element__like"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+      </div>
+    </footer>
+    <div class="popup">
+      <div class="popup__content form">
+        <button class="popup__close"></button>
+        <p class="popup__edit">Редактировать профиль</p>
+        <form class="input">
+          <input type="text" class="input__text input__text_type_name">
+          <input type="text" class="input__text input__text_type_status">
+          <button type="submit" class="form__submit-btn form__submit-btn_action_save">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
