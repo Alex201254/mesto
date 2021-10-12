@@ -1,10 +1,12 @@
-const modalWindow = document.querySelectorAll('.popup');
+const modalWindow = document.querySelector('.popup');
+const modalWindow1 = document.querySelector('.new-place__popup');
+const modalWindow2 = document.querySelector('.place__popup');
 const popupContent = document.querySelectorAll('.popup__content');
 const modalWindowCloseBtn = document.querySelectorAll('.popup__close');
 const editBtn = document.querySelector('.profile__edit-button');
 const caption = document.querySelector('.profile__caption');
-const form1 = modalWindow[0].querySelector('.form');
-const form2 = modalWindow[1].querySelector('.form');
+const form1 = modalWindow.querySelector('.form');
+const form2 = modalWindow1.querySelector('.form');
 const user = form1.querySelector('.form__text_type_name');
 const status = form1.querySelector('.form__text_type_status');
 const place = form2.querySelector('.form__text_type_name');
@@ -15,28 +17,28 @@ const addBtn = document.querySelector('.profile__add-button');
 const elementsCont = document.querySelector('.elements__container');
 const elementTemplate = document.querySelector('#card-template').content;
 const elementPhoto = elementTemplate.querySelector('.element__photo');
-const popupImg = modalWindow[2].querySelector('.popup__image');
-const popupPlace = modalWindow[2].querySelector('.popup__place');
+const popupImg = modalWindow2.querySelector('.popup__image');
+const popupPlace = modalWindow2.querySelector('.popup__place');
 
 
 
-function openModalWindow(index) {
-  modalWindow[index].classList.add('popup_is-opened');
-  if(index === 0) {
+function openModalWindow(popup) {
+  popup.classList.add('popup_is-opened');
+  if(popup === modalWindow) {
     user.value = name.textContent;
     status.value = statuss.textContent;
   }
 }
 
-function closeModalWindow(index) {
-  modalWindow[index].classList.remove('popup_is-opened');
+function closeModalWindow(popup) {
+  popup.classList.remove('popup_is-opened');
 }
 
-editBtn.addEventListener('click',()=> openModalWindow(0));
-addBtn.addEventListener('click', ()=> openModalWindow(1));
-modalWindowCloseBtn[0].addEventListener('click',()=> closeModalWindow(0));
-modalWindowCloseBtn[1].addEventListener('click',()=> closeModalWindow(1));
-modalWindowCloseBtn[2].addEventListener('click',()=> closeModalWindow(2));
+editBtn.addEventListener('click',()=> openModalWindow(modalWindow));
+addBtn.addEventListener('click', ()=> openModalWindow(modalWindow1));
+modalWindowCloseBtn[0].addEventListener('click',()=> closeModalWindow(modalWindow));
+modalWindowCloseBtn[1].addEventListener('click',()=> closeModalWindow(modalWindow1));
+modalWindowCloseBtn[2].addEventListener('click',()=> closeModalWindow(modalWindow2));
 
 
 
@@ -44,7 +46,7 @@ function saveUser(evt) {
   evt.preventDefault();
   name.textContent = user.value;
   statuss.textContent = status.value;
-  closeModalWindow(0);
+  closeModalWindow(modalWindow);
 }
 
 function renderElement(placeValue, linkValue) {
@@ -65,7 +67,7 @@ function renderElement(placeValue, linkValue) {
   elementPhoto.addEventListener('click', ()=> {
     popupImg.src = linkValue;
     popupPlace.textContent = placeValue;
-    openModalWindow(2);
+    openModalWindow(modalWindow2);
   });
   if(placeValue === place.value){
     elementsCont.prepend(el);
@@ -79,7 +81,9 @@ function renderElement(placeValue, linkValue) {
 function saveImg(evt) {
   evt.preventDefault();
   renderElement(place.value, link.value);
-  closeModalWindow(1);
+  place.value = '';
+  link.value = '';
+  closeModalWindow(modalWindow1);
 }
 
 form1.addEventListener('submit', saveUser);
@@ -115,7 +119,5 @@ const initialCards = [
 for (let i = 0; i < initialCards.length; i++) {
   renderElement(initialCards[i].name, initialCards[i].link);
 }
-
-
 
 

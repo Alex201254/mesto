@@ -1,6 +1,10 @@
 .popup {
   display: flex;
-  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0s;
   opacity: 0;
   align-items: center;
   justify-content: center;
@@ -10,7 +14,4 @@
   left: 0;
   bottom: 0;
   right: 0;
-  transition-property: opacity, height;
-  transition-duration: 0.5s, 0s;
-  transition-delay: 0s, 0.5s;
 }
