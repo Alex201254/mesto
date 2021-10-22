@@ -1,5 +1,5 @@
-.form__text:not(:last-child) {
-  margin: 0 0 30px;
+.form__text {
+  margin: 0 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 530px) {
-  .form__text:not(:last-child) {
+  .form__text {
     width: 238px;
     height: 27px;
   }

@@ -20,25 +20,41 @@ const elementTemplate = document.querySelector('#card-template').content;
 const elementPhoto = elementTemplate.querySelector('.element__photo');
 const popupImg = imagePopup.querySelector('.popup__image');
 const popupPlace = imagePopup.querySelector('.popup__place');
+const page = document.querySelector('.root');
 
+function clickOverlay(evt) {
+  const evtTarget = evt.target;
+  closeModalWindow(evtTarget);
+}
 
 
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
+  page.addEventListener('keydown', function (evt) {
+    if(evt.key === 'Escape'){
+      closeModalWindow(popup);
+    }
+  });
+  popup.addEventListener('click', clickOverlay);
 }
 
 function closeModalWindow(popup) {
   popup.classList.remove('popup_is-opened');
+  popup.removeEventListener('click', clickOverlay);
 }
+
 
 editBtn.addEventListener('click',()=> {
   user.value = name.textContent;
   status.value = statuss.textContent;
   openModalWindow(profilePopup)});
+
 addBtn.addEventListener('click', ()=> openModalWindow(newCardPopup));
 profileCloseBtn.addEventListener('click',()=> closeModalWindow(profilePopup));
 newCardCloseBtn.addEventListener('click',()=> closeModalWindow(newCardPopup));
 imageCloseBtn.addEventListener('click',()=> closeModalWindow(imagePopup));
+
+
 
 
 
