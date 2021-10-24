@@ -28,18 +28,23 @@ function clickOverlay(evt) {
 }
 
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup); 
+  }
+}
+
+
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
-  page.addEventListener('keydown', function (evt) {
-    if(evt.key === 'Escape'){
-      closeModalWindow(popup);
-    }
-  });
+  document.addEventListener('keydown', closeByEscape); 
   popup.addEventListener('click', clickOverlay);
 }
 
 function closeModalWindow(popup) {
   popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closeByEscape); 
   popup.removeEventListener('click', clickOverlay);
 }
 
