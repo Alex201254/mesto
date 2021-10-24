@@ -27,15 +27,6 @@ function clickOverlay(evt) {
   closeModalWindow(evtTarget);
 }
 
-
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closeModalWindow(openedPopup); 
-  }
-}
-
-
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closeByEscape); 
@@ -48,6 +39,12 @@ function closeModalWindow(popup) {
   popup.removeEventListener('click', clickOverlay);
 }
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closeModalWindow(openedPopup); 
+  }
+}
 
 editBtn.addEventListener('click',()=> {
   user.value = name.textContent;
