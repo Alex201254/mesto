@@ -41,7 +41,7 @@ function closeModalWindow(popup) {
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
+    const openedPopup = document.querySelector('.popup_is-opened');
     closeModalWindow(openedPopup); 
   }
 }
