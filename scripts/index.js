@@ -20,7 +20,6 @@ const elementTemplate = document.querySelector('#card-template').content;
 const elementPhoto = elementTemplate.querySelector('.element__photo');
 const popupImg = imagePopup.querySelector('.popup__image');
 const popupPlace = imagePopup.querySelector('.popup__place');
-const page = document.querySelector('.root');
 
 function clickOverlay(evt) {
   const evtTarget = evt.target;
@@ -107,6 +106,7 @@ function saveImg(evt) {
   place.value = '';
   link.value = '';
   closeModalWindow(newCardPopup);
+  newCardForm.querySelector('.form__submit-btn').setAttribute('disabled', true);
 }
 
 profileForm.addEventListener('submit', saveUser);
