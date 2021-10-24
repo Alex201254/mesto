@@ -39,9 +39,6 @@ const toggleButtonState = (inputList, buttonElement, inactiveBtn) => {
 const setEventListeners = (formElement, input, submitBtn, inactiveBtn, inputErr, error) => {
   const inputList = Array.from(formElement.querySelectorAll(input));
   const buttonElement = formElement.querySelector(submitBtn);
-  const atrib = formElement.getAttribute('name');
-  if(atrib === 'form-place')
-    toggleButtonState(inputList, buttonElement, inactiveBtn);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement, inputErr, error);

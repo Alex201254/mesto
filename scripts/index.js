@@ -20,6 +20,7 @@ const elementTemplate = document.querySelector('#card-template').content;
 const elementPhoto = elementTemplate.querySelector('.element__photo');
 const popupImg = imagePopup.querySelector('.popup__image');
 const popupPlace = imagePopup.querySelector('.popup__place');
+const subbtn = newCardForm.querySelector('.form__submit-btn');
 
 function clickOverlay(evt) {
   const evtTarget = evt.target;
@@ -28,20 +29,20 @@ function clickOverlay(evt) {
 
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', closeByEscape); 
+  document.addEventListener('keydown', closeByEscape);
   popup.addEventListener('click', clickOverlay);
 }
 
 function closeModalWindow(popup) {
   popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', closeByEscape); 
+  document.removeEventListener('keydown', closeByEscape);
   popup.removeEventListener('click', clickOverlay);
 }
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_is-opened');
-    closeModalWindow(openedPopup); 
+    closeModalWindow(openedPopup);
   }
 }
 
@@ -50,7 +51,11 @@ editBtn.addEventListener('click',()=> {
   status.value = statuss.textContent;
   openModalWindow(profilePopup)});
 
-addBtn.addEventListener('click', ()=> openModalWindow(newCardPopup));
+addBtn.addEventListener('click', ()=> {
+  subbtn.setAttribute('disabled', true);
+  subbtn.classList.add('form__submit-btn_inactive');
+  openModalWindow(newCardPopup)});
+
 profileCloseBtn.addEventListener('click',()=> closeModalWindow(profilePopup));
 newCardCloseBtn.addEventListener('click',()=> closeModalWindow(newCardPopup));
 imageCloseBtn.addEventListener('click',()=> closeModalWindow(imagePopup));
@@ -106,7 +111,8 @@ function saveImg(evt) {
   place.value = '';
   link.value = '';
   closeModalWindow(newCardPopup);
-  newCardForm.querySelector('.form__submit-btn').setAttribute('disabled', true);
+  subbtn.setAttribute('disabled', true);
+  subbtn.classList.add('form__submit-btn_inactive');
 }
 
 profileForm.addEventListener('submit', saveUser);
