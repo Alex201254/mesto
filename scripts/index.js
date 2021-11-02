@@ -1,11 +1,11 @@
+import {imagePopup, imageCloseBtn, Card} from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const profilePopup = document.querySelector('.popup_profile');
 const newCardPopup = document.querySelector('.popup_new-card');
-const imagePopup = document.querySelector('.popup_image');
 const profileCloseBtn = profilePopup.querySelector('.popup__close');
 const newCardCloseBtn = newCardPopup.querySelector('.popup__close');
-const imageCloseBtn = imagePopup.querySelector('.popup__close');
 const editBtn = document.querySelector('.profile__edit-button');
-const caption = document.querySelector('.profile__caption');
 const profileForm = profilePopup.querySelector('.form');
 const newCardForm = newCardPopup.querySelector('.form');
 const user = profileForm.querySelector('.form__text_type_name');
@@ -16,10 +16,6 @@ const name = document.querySelector('.profile__name');
 const statuss = document.querySelector('.profile__status');
 const addBtn = document.querySelector('.profile__add-button');
 const elementsCont = document.querySelector('.elements__container');
-const elementTemplate = document.querySelector('#card-template').content;
-const elementPhoto = elementTemplate.querySelector('.element__photo');
-const popupImg = imagePopup.querySelector('.popup__image');
-const popupPlace = imagePopup.querySelector('.popup__place');
 const subbtn = newCardForm.querySelector('.form__submit-btn');
 
 function clickOverlay(evt) {
@@ -27,10 +23,26 @@ function clickOverlay(evt) {
   closeModalWindow(evtTarget);
 }
 
+const hideErrors = () => {
+  const errText = Array.from(document.querySelectorAll('.form__text-error'));
+  errText.forEach((err) => {
+    err.classList.remove('form__text-error_active');
+    err.textContent = '';
+  })
+  const inputs = Array.from(document.querySelectorAll('.form__text'));
+  inputs.forEach((input) => {
+    input.classList.remove('form__text_type_error');
+  })
+  const subbtn = document.querySelector('.form__submit-btn');
+  subbtn.removeAttribute('disabled');
+  subbtn.classList.remove('form__submit-btn_inactive');
+}
+
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closeByEscape);
   popup.addEventListener('click', clickOverlay);
+  hideErrors();
 }
 
 function closeModalWindow(popup) {
@@ -71,43 +83,21 @@ function saveUser(evt) {
   closeModalWindow(profilePopup);
 }
 
-function createCard(placeValue, linkValue) {
-  const element = elementTemplate.querySelector('.element').cloneNode(true);
-  const cardImage = element.querySelector('.element__photo');
-  cardImage.src = linkValue;
-  cardImage.alt = placeValue;
-  element.querySelector('.element__place').textContent = placeValue;
-  const elementLike = element.querySelector('.element__like');
-  elementLike.addEventListener('click', function(evt) {
-    const eventTarget = evt.target;
-    eventTarget.classList.toggle('element__like_active');
-  })
-  const elementDel = element.querySelector('.element__delete');
-  elementDel.addEventListener('click', function() {
-    const listItem = elementDel.closest('.element');
-    listItem.remove();
-  })
-  cardImage.addEventListener('click', ()=> {
-    cardImage.alt = placeValue;
-    popupImg.src = linkValue;
-    popupPlace.textContent = placeValue;
-    openModalWindow(imagePopup);
-  })
-  return element;
-}
 
-function renderElement(placeValue, linkValue, prepend=true) {
-  const el = createCard(placeValue, linkValue);
+
+function renderElement(el, prepend=true) {
+  const card = new Card(el, '.card-template');
+  const cardElement = card.generateCard();
   if(prepend){
-    elementsCont.prepend(el);
+    elementsCont.prepend(cardElement);
   }else{
-    elementsCont.append(el);
+    elementsCont.append(cardElement);
   }
 }
 
 function saveImg(evt) {
   evt.preventDefault();
-  renderElement(place.value, link.value);
+  renderElement({name: place.value, link: link.value});
   place.value = '';
   link.value = '';
   closeModalWindow(newCardPopup);
@@ -145,6 +135,19 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach(item => renderElement(item.name, item.link));
+initialCards.forEach(item => renderElement(item));
 
+const elementsForm = document.querySelectorAll('.form');
+elementsForm.forEach(formelement => {
+  const formVal = new FormValidator({
+    formSelector: '.form',
+    inputSelector: '.form__text',
+    submitButtonSelector: '.form__submit-btn',
+    inactiveButtonClass: 'form__submit-btn_inactive',
+    inputErrorClass: 'form__text_type_error',
+    errorClass: 'form__text-error_active'
+  }, formelement);
+  const form = formVal.enableValidation();
+})
 
+export {openModalWindow};
