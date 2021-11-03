@@ -1,4 +1,4 @@
-import {imagePopup, imageCloseBtn, Card} from './Card.js';
+import {imagePopup, Card} from './Card.js';
 import FormValidator from './FormValidator.js';
 
 const profilePopup = document.querySelector('.popup_profile');
@@ -16,33 +16,19 @@ const name = document.querySelector('.profile__name');
 const statuss = document.querySelector('.profile__status');
 const addBtn = document.querySelector('.profile__add-button');
 const elementsCont = document.querySelector('.elements__container');
-const subbtn = newCardForm.querySelector('.form__submit-btn');
+const imageCloseBtn = imagePopup.querySelector('.popup__close');
 
 function clickOverlay(evt) {
   const evtTarget = evt.target;
-  closeModalWindow(evtTarget);
-}
-
-const hideErrors = () => {
-  const errText = Array.from(document.querySelectorAll('.form__text-error'));
-  errText.forEach((err) => {
-    err.classList.remove('form__text-error_active');
-    err.textContent = '';
-  })
-  const inputs = Array.from(document.querySelectorAll('.form__text'));
-  inputs.forEach((input) => {
-    input.classList.remove('form__text_type_error');
-  })
-  const subbtn = document.querySelector('.form__submit-btn');
-  subbtn.removeAttribute('disabled');
-  subbtn.classList.remove('form__submit-btn_inactive');
+  if (evt.currentTarget === evtTarget) {
+    closeModalWindow(evtTarget);
+  }
 }
 
 function openModalWindow(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closeByEscape);
   popup.addEventListener('click', clickOverlay);
-  hideErrors();
 }
 
 function closeModalWindow(popup) {
@@ -61,20 +47,16 @@ function closeByEscape(evt) {
 editBtn.addEventListener('click',()=> {
   user.value = name.textContent;
   status.value = statuss.textContent;
-  openModalWindow(profilePopup)});
+  openModalWindow(profilePopup);
+  formValProf.resetValidation();});
 
 addBtn.addEventListener('click', ()=> {
-  subbtn.setAttribute('disabled', true);
-  subbtn.classList.add('form__submit-btn_inactive');
-  openModalWindow(newCardPopup)});
+  openModalWindow(newCardPopup);
+  formValPlace.resetValidation()});
 
 profileCloseBtn.addEventListener('click',()=> closeModalWindow(profilePopup));
 newCardCloseBtn.addEventListener('click',()=> closeModalWindow(newCardPopup));
 imageCloseBtn.addEventListener('click',()=> closeModalWindow(imagePopup));
-
-
-
-
 
 function saveUser(evt) {
   evt.preventDefault();
@@ -82,8 +64,6 @@ function saveUser(evt) {
   statuss.textContent = status.value;
   closeModalWindow(profilePopup);
 }
-
-
 
 function renderElement(el, prepend=true) {
   const card = new Card(el, '.card-template');
@@ -101,8 +81,6 @@ function saveImg(evt) {
   place.value = '';
   link.value = '';
   closeModalWindow(newCardPopup);
-  subbtn.setAttribute('disabled', true);
-  subbtn.classList.add('form__submit-btn_inactive');
 }
 
 profileForm.addEventListener('submit', saveUser);
@@ -137,17 +115,25 @@ const initialCards = [
 
 initialCards.forEach(item => renderElement(item));
 
-const elementsForm = document.querySelectorAll('.form');
-elementsForm.forEach(formelement => {
-  const formVal = new FormValidator({
-    formSelector: '.form',
-    inputSelector: '.form__text',
-    submitButtonSelector: '.form__submit-btn',
-    inactiveButtonClass: 'form__submit-btn_inactive',
-    inputErrorClass: 'form__text_type_error',
-    errorClass: 'form__text-error_active'
-  }, formelement);
-  const form = formVal.enableValidation();
-})
+const formValProf = new FormValidator({
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_inactive',
+  inputErrorClass: 'form__text_type_error',
+  errorClass: 'form__text-error_active'
+}, profileForm);
+
+const formValPlace = new FormValidator({
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_inactive',
+  inputErrorClass: 'form__text_type_error',
+  errorClass: 'form__text-error_active'
+}, newCardForm);
+
+formValProf.enableValidation();
+formValPlace.enableValidation();
 
 export {openModalWindow};

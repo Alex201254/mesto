@@ -1,10 +1,7 @@
 import  {openModalWindow} from './index.js';
 const imagePopup = document.querySelector('.popup_image');
-const imageCloseBtn = imagePopup.querySelector('.popup__close');
 const popupImg = imagePopup.querySelector('.popup__image');
 const popupPlace = imagePopup.querySelector('.popup__place');
-const elementTemplate = document.querySelector('.card-template').content;
-const elementPhoto = elementTemplate.querySelector('.element__photo');
 
 class Card {
   constructor(data, cardSelector) {
@@ -34,21 +31,14 @@ class Card {
 
   _handleOpenPopup() {
     popupImg.src = this._link;
+    popupImg.alt = this._name;
     popupPlace.textContent = this._name;
     openModalWindow(imagePopup);
-  }
-
-  _handleClosePopup() {
-    elementPhoto.src = this._link;
-    imagePopup.classList.remove('popup_is-opened');
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__photo').addEventListener('click', () => {
       this._handleOpenPopup();
-    })
-    imageCloseBtn.addEventListener('click', () => {
-      this._handleClosePopup();
     })
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
       const eventTarget = evt.target;
@@ -61,4 +51,4 @@ class Card {
   }
 }
 
-export {imagePopup, imageCloseBtn, Card};
+export {imagePopup, Card};
