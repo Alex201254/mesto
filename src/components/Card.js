@@ -1,13 +1,9 @@
-import  {openModalWindow} from './index.js';
-const imagePopup = document.querySelector('.popup_image');
-const popupImg = imagePopup.querySelector('.popup__image');
-const popupPlace = imagePopup.querySelector('.popup__place');
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -29,17 +25,8 @@ class Card {
     return this._element;
   }
 
-  _handleOpenPopup() {
-    popupImg.src = this._link;
-    popupImg.alt = this._name;
-    popupPlace.textContent = this._name;
-    openModalWindow(imagePopup);
-  }
-
   _setEventListeners() {
-    this._element.querySelector('.element__photo').addEventListener('click', () => {
-      this._handleOpenPopup();
-    })
+    this._element.querySelector('.element__photo').addEventListener('click', this._handleCardClick);
     this._element.querySelector('.element__like').addEventListener('click', (evt) => {
       const eventTarget = evt.target;
       eventTarget.classList.toggle('element__like_active');
@@ -51,4 +38,4 @@ class Card {
   }
 }
 
-export {imagePopup, Card};
+export {Card};
