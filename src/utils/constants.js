@@ -1,4 +1,5 @@
 export const profilePopup = document.querySelector('.popup_profile');
+export const form = document.querySelector('.form');
 export const newCardPopup = document.querySelector('.popup_new-card');
 export const profileCloseBtn = profilePopup.querySelector('.popup__close');
 export const newCardCloseBtn = newCardPopup.querySelector('.popup__close');
