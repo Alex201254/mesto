@@ -1,5 +1,4 @@
 export const profilePopup = document.querySelector('.popup_profile');
-export const form = document.querySelector('.form');
 export const newCardPopup = document.querySelector('.popup_new-card');
 export const profileCloseBtn = profilePopup.querySelector('.popup__close');
 export const newCardCloseBtn = newCardPopup.querySelector('.popup__close');
@@ -15,6 +14,14 @@ export const statuss = document.querySelector('.profile__status');
 export const addBtn = document.querySelector('.profile__add-button');
 export const elementsCont = document.querySelector('.elements__container');
 export const imagePopup = document.querySelector('.popup_image');
+export const config = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_inactive',
+  inputErrorClass: 'form__text_type_error',
+  errorClass: 'form__text-error_active'
+};
 export const imageCloseBtn = imagePopup.querySelector('.popup__close');
 export const initialCards = [
   {

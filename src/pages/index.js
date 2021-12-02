@@ -3,7 +3,7 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
-import { initialCards, form, elementsCont, profileForm, profilePopup, newCardPopup,  imagePopup, newCardForm, editBtn, addBtn, user, status, name, statuss} from '../utils/constants.js';
+import { initialCards, config, elementsCont, profileForm, profilePopup, newCardPopup,  imagePopup, newCardForm, editBtn, addBtn, user, status, name, statuss} from '../utils/constants.js';
 import UserInfo from '../components/UserInfo.js';
 import createCard from '../utils/utils.js';
 
@@ -43,23 +43,8 @@ const cardList = new Section({
 
   cardList.renderItems();
 
-const formValProf = new FormValidator({
-  formSelector: form,
-  inputSelector: '.form__text',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_inactive',
-  inputErrorClass: 'form__text_type_error',
-  errorClass: 'form__text-error_active'
-}, profileForm);
-
-const formValPlace = new FormValidator({
-  formSelector: form,
-  inputSelector: '.form__text',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_inactive',
-  inputErrorClass: 'form__text_type_error',
-  errorClass: 'form__text-error_active'
-}, newCardForm);
+const formValProf = new FormValidator(config, profileForm);
+const formValPlace = new FormValidator(config, newCardForm);
 
 formValProf.enableValidation();
 formValPlace.enableValidation();
